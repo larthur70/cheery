@@ -5,7 +5,7 @@ Auth: **User JWT** or `Authorization: Bearer CRON_SECRET`
 Cron: every 30 minutes (`whatsapp-sync-templates` via `pg_cron` + `pg_net`)  
 Vault secret: `birthday_reminders_cron_secret` (same as Edge `CRON_SECRET`)
 
-URL: `https://ssgyoystsndmodubaqlh.supabase.co/functions/v1/whatsapp-sync-templates`
+URL: `https://<project-ref>.supabase.co/functions/v1/whatsapp-sync-templates`
 
 ## Body (optional)
 

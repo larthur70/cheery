@@ -83,4 +83,4 @@ Firebase `google-services.json`, `GoogleService-Info.plist`, and `lib/firebase_o
 
 ## License
 
-Private. All rights reserved.
+All rights reserved.

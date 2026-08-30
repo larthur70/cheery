@@ -1,7 +1,7 @@
 # Birthday reminders — Edge Function ops
 
 Function: `send-birthday-reminders`  
-URL: `https://ssgyoystsndmodubaqlh.supabase.co/functions/v1/send-birthday-reminders`  
+URL: `https://<project-ref>.supabase.co/functions/v1/send-birthday-reminders`  
 Cron: every 15 minutes (`send-birthday-reminders` via `pg_cron` + `pg_net`)
 
 ## Required Edge Function secrets
@@ -18,7 +18,7 @@ Without (1) and (2), the cron will call the function but sends will fail.
 
 ```bash
 curl -X POST \
-  'https://ssgyoystsndmodubaqlh.supabase.co/functions/v1/send-birthday-reminders' \
+  'https://<project-ref>.supabase.co/functions/v1/send-birthday-reminders' \
   -H "Authorization: Bearer $CRON_SECRET" \
   -H 'Content-Type: application/json' \
   -d '{}'

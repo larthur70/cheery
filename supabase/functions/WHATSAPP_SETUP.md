@@ -36,7 +36,7 @@ Sem Meta: basta `SITE_URL` (+ `CRON_SECRET`/`FCM` já existentes) para testar UI
 Callback URL:
 
 ```text
-https://ssgyoystsndmodubaqlh.supabase.co/functions/v1/whatsapp-webhook
+https://<project-ref>.supabase.co/functions/v1/whatsapp-webhook
 ```
 
 - Verify token = valor de `META_WEBHOOK_VERIFY_TOKEN`
@@ -65,7 +65,7 @@ https://ssgyoystsndmodubaqlh.supabase.co/functions/v1/whatsapp-webhook
 
 ```bash
 curl -X POST \
-  'https://ssgyoystsndmodubaqlh.supabase.co/functions/v1/send-birthday-whatsapp' \
+  'https://<project-ref>.supabase.co/functions/v1/send-birthday-whatsapp' \
   -H "Authorization: Bearer $CRON_SECRET" \
   -H 'Content-Type: application/json' \
   -d '{}'
@@ -73,7 +73,7 @@ curl -X POST \
 
 ```bash
 curl -X POST \
-  'https://ssgyoystsndmodubaqlh.supabase.co/functions/v1/whatsapp-sync-templates' \
+  'https://<project-ref>.supabase.co/functions/v1/whatsapp-sync-templates' \
   -H "Authorization: Bearer $CRON_SECRET" \
   -H 'Content-Type: application/json' \
   -d '{}'

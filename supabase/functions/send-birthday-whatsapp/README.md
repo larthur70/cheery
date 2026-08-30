@@ -5,7 +5,7 @@ Auth: `Authorization: Bearer CRON_SECRET`
 Cron: every 15 minutes (`send-birthday-whatsapp` via `pg_cron` + `pg_net`)  
 Vault secret: `birthday_reminders_cron_secret` (same as Edge `CRON_SECRET`)
 
-URL: `https://ssgyoystsndmodubaqlh.supabase.co/functions/v1/send-birthday-whatsapp`
+URL: `https://<project-ref>.supabase.co/functions/v1/send-birthday-whatsapp`
 
 Mirrors `send-birthday-reminders` timing (`notification_time` + timezone window), but sends approved templates via Graph `POST /{phone_number_id}/messages` for clients with `automatic_enabled`.
 
