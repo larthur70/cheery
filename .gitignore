@@ -66,6 +66,9 @@ assets/env/.env
 /utils_project/
 
 # Node / Cloudflare Wrangler local state
+# package.json is only for the local Apple JWT helper in utils_project/
+/package.json
+/package-lock.json
 node_modules/
 .wrangler/
 
