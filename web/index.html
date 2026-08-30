@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <!-- Bounce Stripe / email / WhatsApp returns into the native app on phones. -->
+  <script>
+    (function () {
+      try {
+        var ua = navigator.userAgent || "";
+        if (!/iPhone|iPad|iPod|Android/i.test(ua)) return;
+        var path = (location.pathname || "/").replace(/\/+$/, "") || "/";
+        var params = new URLSearchParams(location.search);
+        var hostAndPath = null;
+        if (path === "/whatsapp/callback") hostAndPath = "whatsapp/callback";
+        else if (path === "/auth/confirm-delete") hostAndPath = "auth/confirm-delete";
+        else if (
+          path === "/profile" &&
+          (params.get("checkout") === "success" ||
+            params.get("checkout") === "cancel")
+        ) {
+          hostAndPath = "profile";
+        }
+        if (!hostAndPath) return;
+        window.location.href =
+          "cheery://" + hostAndPath + location.search + location.hash;
+      } catch (e) {}
+    })();
+  </script>
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Birthday and customer relationship messaging for small businesses.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Cheery">
+  <meta name="theme-color" content="#EF4444">
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <title>Cheery</title>
+  <link rel="manifest" href="manifest.json">
+
+  <!--
+    Required for posthog_flutter on Web: the Dart SDK only wraps window.posthog.
+    Without this snippet, identify/capture are no-ops.
+    Project API key is a public client token (same as assets/env/.env).
+  -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagResult reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init("YOUR_POSTHOG_API_KEY", {
+      api_host: "https://us.i.posthog.com",
+      // Keep config minimal — "defaults" + cookieless/consent can drop custom
+      // capture while still allowing Web Vitals through.
+      autocapture: false,
+      capture_pageview: false,
+      capture_pageleave: false,
+      capture_performance: false,
+      persistence: "localStorage+cookie",
+      person_profiles: "identified_only",
+      respect_dnt: false,
+      opt_out_capturing_by_default: false,
+      loaded: function(ph) {
+        try {
+          // Clear any prior opt-out from earlier sessions / project settings.
+          if (typeof ph.opt_in_capturing === "function") {
+            ph.opt_in_capturing();
+          }
+          var optedOut =
+            typeof ph.has_opted_out_capturing === "function" &&
+            ph.has_opted_out_capturing();
+          console.info("[Cheery] PostHog JS ready", {
+            optedOut: optedOut,
+            distinctId:
+              typeof ph.get_distinct_id === "function"
+                ? ph.get_distinct_id()
+                : null,
+          });
+          ph.capture(
+            "cheery_web_boot",
+            { source: "index_html" },
+            { send_instantly: true }
+          );
+        } catch (e) {
+          console.error("[Cheery] PostHog boot capture failed", e);
+        }
+      }
+    });
+  </script>
+</head>
+<body>
+  <!--
+    You can customize the "flutter_bootstrap.js" script.
+    This is useful to provide a custom configuration to the Flutter loader
+    or to give the user feedback during the initialization process.
+
+    For more details:
+    * https://docs.flutter.dev/platform-integration/web/initialization
+  -->
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

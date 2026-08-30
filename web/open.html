@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>Abrindo o Cheery</title>
+  <style>
+    :root { color-scheme: light; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #FEF2F2;
+      color: #1C1212;
+      text-align: center;
+      padding: 24px;
+    }
+    a { color: #EF4444; }
+    .card { max-width: 360px; }
+    .fallback { display: none; margin-top: 16px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p>Abrindo o Cheery…</p>
+    <p class="fallback" id="fallback">
+      <a id="open-app" href="#">Abrir o app</a>
+      ·
+      <a id="continue-web" href="/home">Continuar no navegador</a>
+    </p>
+  </div>
+  <script>
+    (function () {
+      var params = new URLSearchParams(location.search);
+      var to = params.get("to") || "";
+      if (to.indexOf("cheery://") !== 0) {
+        location.replace("/home");
+        return;
+      }
+
+      var extras = [];
+      params.forEach(function (value, key) {
+        if (key === "to") return;
+        extras.push(encodeURIComponent(key) + "=" + encodeURIComponent(value));
+      });
+      var join = to.indexOf("?") >= 0 ? "&" : "?";
+      var deep = extras.length ? to + join + extras.join("&") : to;
+      deep += location.hash || "";
+
+      var webPath = "/home";
+      if (to.indexOf("cheery://profile") === 0) webPath = "/profile";
+      else if (to.indexOf("cheery://auth/confirm-delete") === 0) {
+        webPath = "/auth/confirm-delete";
+      } else if (to.indexOf("cheery://whatsapp/callback") === 0) {
+        webPath = "/whatsapp/callback";
+      } else if (to.indexOf("cheery://auth-callback") === 0) {
+        webPath = "/auth/callback";
+      }
+      var web = webPath + (extras.length ? "?" + extras.join("&") : "") +
+        (location.hash || "");
+
+      document.getElementById("open-app").setAttribute("href", deep);
+      document.getElementById("continue-web").setAttribute("href", web);
+
+      window.location.href = deep;
+      setTimeout(function () {
+        document.getElementById("fallback").style.display = "block";
+      }, 1400);
+    })();
+  </script>
+</body>
+</html>
