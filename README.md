@@ -12,7 +12,7 @@ It runs on **iOS**, **Android**, and **Web**, with the same product surface and 
 - **Reminders** — local notifications and FCM push when a birthday is coming up.
 - **WhatsApp** — connect a Meta/WhatsApp Business account, sync approved templates, and send messages (manual or automatic).
 - **Auth** — email/password, Google, and Sign in with Apple, plus password recovery and account deletion with email confirmation.
-- **Billing** — free plan with client limits and a Pro waitlist / Stripe checkout for the paid plan.
+- **Billing** — free plan with client limits and a Pro / Stripe checkout for the paid plan.
 - **Offline** — local Sembast cache and a sync queue so the app still works with a weak connection.
 
 ## Architecture
