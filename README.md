@@ -10,7 +10,7 @@ It runs on **iOS**, **Android**, and **Web**, with the same product surface and 
 - **Calendar** — birthdays and relationship dates in one place.
 - **Templates** — reusable WhatsApp messages, including an automatic birthday flow.
 - **Reminders** — local notifications and FCM push when a birthday is coming up.
-- **WhatsApp** — connect a Meta/WhatsApp Business account, sync approved templates, and send messages (manual or automatic).
+- **WhatsApp** — wa.me button to make sending messages easier
 - **Auth** — email/password, Google, and Sign in with Apple, plus password recovery and account deletion with email confirmation.
 - **Billing** — free plan with client limits and a Pro / Stripe checkout for the paid plan.
 - **Offline** — local Sembast cache and a sync queue so the app still works with a weak connection.
