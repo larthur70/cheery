@@ -8,11 +8,11 @@ It runs on **iOS**, **Android**, and **Web**, with the same product surface and 
 
 - **Clients** — CRM-style list of customers (name, phone, birthday, notes), with import from contacts, CSV, or Excel.
 - **Calendar** — birthdays and relationship dates in one place.
-- **Templates** — reusable WhatsApp messages, including an automatic birthday flow.
+- **Templates** — reusable WhatsApp messages
 - **Reminders** — local notifications and FCM push when a birthday is coming up.
 - **WhatsApp** — wa.me button to make sending messages easier
 - **Auth** — email/password, Google, and Sign in with Apple, plus password recovery and account deletion with email confirmation.
-- **Billing** — free plan with client limits and a Pro / Stripe checkout for the paid plan.
+- **Billing** — free plan with client limits and a Pro plan billed through Stripe checkout
 - **Offline** — local Sembast cache and a sync queue so the app still works with a weak connection.
 
 ## Architecture
@@ -32,7 +32,7 @@ Backend pieces in this repo:
 | Area | Location |
 |------|----------|
 | SQL migrations | `supabase/migrations/` |
-| Edge Functions | `supabase/functions/` (billing, Stripe webhook, birthday reminders, WhatsApp, account deletion, …) |
+| Edge Functions | `supabase/functions/` (billing, Stripe webhook, birthday reminders, account deletion, …) |
 | Auth email HTML | `supabase/email-templates/` |
 
 ## Requirements
@@ -40,7 +40,7 @@ Backend pieces in this repo:
 - [Flutter](https://docs.flutter.dev/get-started/install) (SDK `^3.11.5`, see `pubspec.yaml`)
 - A [Supabase](https://supabase.com/) project
 - Firebase project (FCM) if you need push on iOS/Android
-- Optional: Stripe, PostHog, Meta WhatsApp, Resend (transactional email)
+- Optional: Stripe, PostHog, Resend (transactional email)
 
 ## Setup
 
@@ -77,7 +77,7 @@ These are ignored by `.gitignore` (or must stay out of git):
 | `android/key.properties`, `*.jks` / `*.keystore` | Play Store upload signing |
 | `*.p8`, `utils_project/` | Apple Sign In private key, Team ID, Key ID |
 | Firebase **service account** JSON | FCM from Edge Functions (`FCM_SERVICE_ACCOUNT_JSON`) |
-| Stripe **secret** key, `CRON_SECRET`, `RESEND_API_KEY`, Meta app secret | Edge Function secrets only |
+| Stripe **secret** key, `CRON_SECRET`, `RESEND_API_KEY` | Edge Function secrets only |
 
 Firebase `google-services.json`, `GoogleService-Info.plist`, and `lib/firebase_options.dart` are **client** identifiers (restricted by bundle ID / SHA). They are not service-account credentials. Rotate any key that was ever committed by accident (Apple `.p8`, keystore passwords, service role, Stripe secret).
 
